@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading IP…</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+      }
+      .ip {
+        margin: 0;
+        font-size: clamp(1.5rem, 10vw, 3rem);
+        font-weight: 900;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Your IP address is</p>
+    <p class="ip">0.0.0.0</p>
+    <script>
+      fetch('https://api.ipify.org?format=text')
+        .then(r => r.text())
+        .then(ip => {
+          const cleanIp = ip.trim();
+          document.querySelector('.ip').textContent = cleanIp;
+          document.title = cleanIp;
+        });
+    </script>
+  </body>
+</html>
