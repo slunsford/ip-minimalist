@@ -14,40 +14,38 @@
         color-scheme: light dark;
       }
       body {
+        text-align: center;
         font-family: system-ui, sans-serif;
       }
       footer {
         position: absolute;
+        width: 100%;
         bottom: 0.5rem;
+        left: 0;
+        font-size: small;
 
         a {
-          font-size: small;
           color: inherit;
           opacity: 0.5;
-
-          &:hover {
-            opacity: 0.7;
-          }
+        }
+        a:hover {
+          opacity: 0.7;
         }
       }
       .ip {
-        margin-top: 0;
         font-size: clamp(1rem, 10vw, 3rem);
         font-weight: 900;
         word-break: break-word;
-        overflow-wrap: anywhere;
       }
     </style>
   </head>
   <body>
     <main>
       <p>Your IP address is:</p>
-      <p class="ip"></p>
+      <div class="ip"></div>
     </main>
     <footer>
-      <a href="https://github.com/slunsford/ip-minimalist" target="_blank">
-        GitHub
-      </a>
+      <a href="https://github.com/slunsford/ip-minimalist" target="_blank">GitHub</a>
     </footer>
     <script>
       fetch('https://api.ipify.org?format=text')
