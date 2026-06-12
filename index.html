@@ -59,24 +59,55 @@
         font-weight: 900;
         word-break: break-word;
       }
+      .copy-link {
+        display: inline-block;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: normal;
+        color: inherit;
+        opacity: 0.6;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .copy-link:hover {
+        opacity: 0.8;
+      }
     </style>
   </head>
   <body>
     <main>
       <p>Your IP address is:</p>
       <div class="ip"></div>
+      <a href="#" class="copy-link" onclick="copyIP(event)">Copy</a>
     </main>
     <footer>
       <a href="https://github.com/slunsford/ip-minimalist" target="_blank">GitHub</a>
     </footer>
     <script>
+      let currentIP = '';
+      
       fetch('https://api.ipify.org?format=text')
         .then(r => r.text())
         .then(ip => {
           const cleanIp = ip.trim();
+          currentIP = cleanIp;
           document.querySelector('.ip').textContent = cleanIp;
           document.title = cleanIp;
         });
+      
+      function copyIP(event) {
+        event.preventDefault();
+        if (currentIP) {
+          navigator.clipboard.writeText(currentIP).then(() => {
+            const copyLink = document.querySelector('.copy-link');
+            const originalText = copyLink.textContent;
+            copyLink.textContent = 'Copied!';
+            setTimeout(() => {
+              copyLink.textContent = originalText;
+            }, 1000);
+          }).catch(() => {});
+        }
+      }
     </script>
   </body>
 </html>
